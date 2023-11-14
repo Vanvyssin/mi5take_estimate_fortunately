@@ -1,29 +1,143 @@
 <!DOCTYPE HTML>
 <html>
+
     <head>
         <meta charset="utf-8">
-        <title>Redirect</title>
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
         <script>
-            window.Telegram.WebApp.expand();
-            window.Telegram.WebApp.enableClosingConfirmation()
+            window.Telegram.WebApp.disableClosingConfirmation()
+            //window.Telegram.WebApp.SettingsButton.show()
             window.Telegram.WebApp.SettingsButton.hide()
             //window.Telegram.WebApp.BackButton.enable()
             //window.Telegram.WebApp.BackButton.show()
             window.Telegram.WebApp.BackButton.hide()
             //window.Telegram.WebApp.BackButton.setText('test')
-            // window.Telegram.WebApp.MainButton.enable()
-            window.Telegram.WebApp.MainButton.hide()
+            window.Telegram.WebApp.MainButton.enable()
             //window.Telegram.WebApp.MainButton.show()
-            //window.Telegram.WebApp.MainButton.setText('test')
+            window.Telegram.WebApp.MainButton.setText('Перейти на обменник')
 
-        let params = new URLSearchParams(document.location.search);
-        let q = decodeURI(params.get("q"));
-        window.location = q;
-        
-        
+            //window.Telegram.WebApp.showPopup();
+
+            //let a = function () {
+            //  // navigator.clipboard.writeText('test test');
+            //  alert("Copied the text");
+            //  let params = new URLSearchParams(document.location.search);
+            //  let q = decodeURI(params.get("q"));
+            //  window.location = q;
+            //  b(hhh);
+            //};
+
+            //let b = function () {
+            //  setTimeout(a, 500);
+            //};
+
+            //window.Telegram.WebApp.SettingsButton.onClick(a)
+
+            //window.Telegram.WebApp.BackButton.onClick(function() {
+            //      })
+
+            // window.Telegram.WebApp.MainButton.onClick(function () {
+            //setTimeout(function () {
+            //    alert(1);
+            //    window.Telegram.WebApp.showPopup({ title: 'tit', message: 'msg' });
+            //}, 5000);
+
+            //let params = new URLSearchParams(document.location.search);
+            //let q = decodeURI(params.get("q"));
+            //window.location = q;
+            //})
+
+            let params = new URLSearchParams(document.location.search);
+            let q = decodeURI(params.get("q"));
+            let tag = decodeURI(params.get("tag"));
+            let addr = decodeURI(params.get("addr"));
+
+            //window.location = q;
+
+            function myFunction() {
+                            let copytext = addr;
+                            if (tag !== "null") {
+                                            copytext += ' tag: ' + tag;
+                                        }
+                            navigator.clipboard.writeText(copytext);
+                            window.Telegram.WebApp.showPopup({ title: 'Скопирован текст', message: copytext, buttons: [{ button_type: 'close', text: 'Ок' }] });
+                        }
+
+            function goto() {
+                            // window.Telegram.WebApp.showPopup({ title: 'Адрес', message: q, buttons: [{ button_type: 'close', text: 'Копировать' }] });
+                            //window.Telegram.WebApp.openLink(q);
+                            window.Telegram.WebApp.MainButton.hide()
+                            window.Telegram.WebApp.enableClosingConfirmation()
+                            window.Telegram.WebApp.expand();
+                            window.location = q;
+                        }
+
+            window.Telegram.WebApp.MainButton.onClick(goto);
+
+
+            setTimeout(function(){
+                            let btn = document.getElementById("copy"); 
+                            if (tag === "null") {
+                                btn.textContent = 'Скопировать адрес';
+                            }
+                            else {
+                                btn.textContent = 'Скопировать тэг и адрес';
+                            }
+                        }, 100);
+
         </script>
+        <style>
+button {
+    font-size: 4vw;
+    color: var(--tg-theme-button-text-color);
+    background-color: var(--tg-theme-button-color);
+    border: none;
+    outline:none;
+    padding: 0.5em 1.1em;
+    border-radius: 1vw;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    width: 100%;
+}
+        html {
+            background-color: var(--tg-theme-secondary-bg-color);
+        }
+        .center {
+            position: absolute;
+            margin: auto;
+            bottom: 50%;
+            top: 25%;
+            left: 50%;
+            min-width: 70%;
+            transform: translate(-50%, 0);
+            background-color: var(--tg-theme-secondary-bg-color);
+            border-radius: 2vw;
+            padding: 10vw 10vw;
+            min-height: 40vw;
+        }
+
+        #col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        </style>
     </head>
-    <body> 
+
+    <body>
     </body>
+    <div id="root">
+    <div class="center" id="root">
+        <div id="col">
+            <button id="copy" onclick="myFunction()">
+            </button>
+            <button onclick="goto()">
+                Перейти на обменник
+            </button>
+        </div>
+
+    </div>
+    </div>
+
 </html>
