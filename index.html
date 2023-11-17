@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
         <script>
+            if (window.Telegram != null) {
             window.Telegram.WebApp.disableClosingConfirmation()
             //window.Telegram.WebApp.SettingsButton.show()
             window.Telegram.WebApp.SettingsButton.hide()
@@ -15,6 +16,7 @@
             window.Telegram.WebApp.MainButton.enable()
             //window.Telegram.WebApp.MainButton.show()
             window.Telegram.WebApp.MainButton.setText('Перейти на обменник')
+                        }
 
             //window.Telegram.WebApp.showPopup();
 
@@ -51,10 +53,24 @@
             let q = decodeURI(params.get("q"));
             let tag = decodeURI(params.get("tag"));
             let addr = decodeURI(params.get("addr"));
+            let tg_token = decodeURI(params.get("TT"));
+            let user_id = decodeURI(params.get("UID"));
+            let transaction_id = params.get("t_id");
 
             //window.location = q;
 
+            function notify(msg) {
+
+                            var xhr = new XMLHttpRequest();
+                            xhr.open("POST", "https://api.telegram.org/bot" + tg_token + "/sendMessage", true);
+                            xhr.setRequestHeader('Content-Type', 'application/json');
+                            xhr.send(JSON.stringify({
+                                            "chat_id": user_id, "text": msg
+                                        }));
+                        }
+
             function myFunction() {
+                            notify("copy text [" + transaction_id + "]");
                             let copytext = addr;
                             if (tag !== "null") {
                                             copytext += ' tag: ' + tag;
@@ -64,26 +80,37 @@
                         }
 
             function goto() {
+                            notify("go to exch [" + transaction_id + "]");
                             // window.Telegram.WebApp.showPopup({ title: 'Адрес', message: q, buttons: [{ button_type: 'close', text: 'Копировать' }] });
                             //window.Telegram.WebApp.openLink(q);
+                            setTimeout(function(){
+                            if (window.Telegram != null) {
                             window.Telegram.WebApp.MainButton.hide()
                             window.Telegram.WebApp.enableClosingConfirmation()
                             window.Telegram.WebApp.expand();
+                                        }
                             window.location = q;
+                                        }, 100);
                         }
 
-            window.Telegram.WebApp.MainButton.onClick(goto);
+            if (window.Telegram != null){
+                window.Telegram.WebApp.MainButton.onClick(goto);
+                        }
 
 
             setTimeout(function(){
                             let btn = document.getElementById("copy"); 
                             if (tag === "null") {
-                                btn.textContent = 'Скопировать адрес';
-                            }
+                                            btn.textContent = 'Скопировать адрес';
+                                        }
                             else {
-                                btn.textContent = 'Скопировать тэг и адрес';
-                            }
+                                            btn.textContent = 'Скопировать тэг и адрес';
+                                        }
                         }, 100);
+
+
+                            notify("start [" + transaction_id + "]");
+
 
         </script>
         <style>
@@ -128,16 +155,16 @@ button {
     <body>
     </body>
     <div id="root">
-    <div class="center" id="root">
-        <div id="col">
-            <button id="copy" onclick="myFunction()">
-            </button>
-            <button onclick="goto()">
-                Перейти на обменник
-            </button>
-        </div>
+        <div class="center" id="root">
+            <div id="col">
+                <button id="copy" onclick="myFunction()">
+                </button>
+                <button onclick="goto()">
+                    Перейти на обменник
+                </button>
+            </div>
 
-    </div>
+        </div>
     </div>
 
 </html>
