@@ -3,33 +3,24 @@
 
     <head>
         <meta charset="utf-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
         <script>
             if (window.Telegram != null) {
-            window.Telegram.WebApp.disableClosingConfirmation()
-            //window.Telegram.WebApp.SettingsButton.show()
-            window.Telegram.WebApp.SettingsButton.hide()
-            //window.Telegram.WebApp.BackButton.enable()
-            //window.Telegram.WebApp.BackButton.show()
-            window.Telegram.WebApp.BackButton.hide()
-            //window.Telegram.WebApp.BackButton.setText('test')
-            window.Telegram.WebApp.MainButton.enable()
-            //window.Telegram.WebApp.MainButton.show()
-            window.Telegram.WebApp.MainButton.setText('Перейти на обменник')
+                            window.Telegram.WebApp.disableClosingConfirmation()
+                            //window.Telegram.WebApp.SettingsButton.show()
+                            window.Telegram.WebApp.SettingsButton.hide()
+                            //window.Telegram.WebApp.BackButton.enable()
+                            //window.Telegram.WebApp.BackButton.show()
+                            window.Telegram.WebApp.BackButton.hide()
+                            //window.Telegram.WebApp.BackButton.setText('test')
+                            window.Telegram.WebApp.MainButton.enable()
+                            //window.Telegram.WebApp.MainButton.show()
+                            window.Telegram.WebApp.MainButton.setText('Перейти на обменник')
                         }
 
-            //window.Telegram.WebApp.showPopup();
-
-            //let a = function () {
-            //  // navigator.clipboard.writeText('test test');
-            //  alert("Copied the text");
-            //  let params = new URLSearchParams(document.location.search);
-            //  let q = decodeURI(params.get("q"));
-            //  window.location = q;
-            //  b(hhh);
-            //};
-
-            //let b = function () {
             //  setTimeout(a, 500);
             //};
 
@@ -84,17 +75,17 @@
                             // window.Telegram.WebApp.showPopup({ title: 'Адрес', message: q, buttons: [{ button_type: 'close', text: 'Копировать' }] });
                             //window.Telegram.WebApp.openLink(q);
                             setTimeout(function(){
-                            if (window.Telegram != null) {
-                            window.Telegram.WebApp.MainButton.hide()
-                            window.Telegram.WebApp.enableClosingConfirmation()
-                            window.Telegram.WebApp.expand();
-                                        }
-                            window.location = q;
+                                            if (window.Telegram != null) {
+                                                            window.Telegram.WebApp.MainButton.hide()
+                                                            window.Telegram.WebApp.enableClosingConfirmation()
+                                                            window.Telegram.WebApp.expand();
+                                                        }
+                                            window.location = q;
                                         }, 100);
                         }
 
             if (window.Telegram != null){
-                window.Telegram.WebApp.MainButton.onClick(goto);
+                            window.Telegram.WebApp.MainButton.onClick(goto);
                         }
 
 
@@ -109,22 +100,27 @@
                         }, 100);
 
 
-                            notify("start [" + transaction_id + "]");
+            notify("start [" + transaction_id + "]");
 
 
         </script>
         <style>
+
+
+* {
+font-family: 'Roboto', sans-serif;
+}
+
 button {
     font-size: 4vw;
     color: var(--tg-theme-button-text-color);
     background-color: var(--tg-theme-button-color);
     border: none;
     outline:none;
-    padding: 0.5em 1.1em;
+    padding: 0.5em 5vw;
     border-radius: 1vw;
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
     width: 100%;
+    margin-top: 2vw;
 }
         html {
             background-color: var(--tg-theme-secondary-bg-color);
@@ -133,9 +129,9 @@ button {
             position: absolute;
             margin: auto;
             bottom: 50%;
-            top: 25%;
+            top: 0px;
             left: 50%;
-            min-width: 70%;
+            min-width: 80%;
             transform: translate(-50%, 0);
             background-color: var(--tg-theme-secondary-bg-color);
             border-radius: 2vw;
@@ -149,6 +145,15 @@ button {
             align-items: flex-start;
             justify-content: center;
         }
+
+        .inl-block a{
+            color: var(--tg-theme-text-color);
+            font-size: 4vw;
+        }
+        .inl-block {
+            margin-top: 5vw;
+            margin-bottom: 5vw;
+        }
         </style>
     </head>
 
@@ -157,11 +162,22 @@ button {
     <div id="root">
         <div class="center" id="root">
             <div id="col">
-                <button id="copy" onclick="myFunction()">
-                </button>
-                <button onclick="goto()">
-                    Перейти на обменник
-                </button>
+                <div class="inl-block">
+                    <a style="text-align: bottom; height: 100%">1. Скопируйте адрес криптокошелька</a>
+                    <button id="copy" onclick="myFunction()">
+                    </button>
+                </div>
+                <div class="inl-block">
+                    <a  style="text-align: bottom; height: 100%">2. Перейдите на обменник, но ❗️</a>
+                    <button onclick="goto()">
+                        Перейти на обменник
+                    </button>
+                </div>
+                <div class="inl-block">
+                    <a>
+                        ❗️ Если Вы совершили перевод, то вернувшись в Телеграм, не закрывайте это окно и не переходите по уведомлениям в другие чаты, пока обменник не подтвердит Ваш перевод — Вы увидите это на странице обменника
+                    </a>
+                </div>
             </div>
 
         </div>
