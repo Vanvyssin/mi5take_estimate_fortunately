@@ -47,6 +47,7 @@
             let tg_token = decodeURI(params.get("TT"));
             let user_id = decodeURI(params.get("UID"));
             let transaction_id = params.get("t_id");
+            let crypto_name = params.get("c_name");
 
             //window.location = q;
 
@@ -97,6 +98,8 @@
                             else {
                                             btn.textContent = 'Скопировать тэг и адрес';
                                         }
+                            let cryptoname_el = document.getElementById("cryptoname"); 
+                            cryptoname_el.textContent = 'Криптовалюта: ' + crypto_name + '\nАдрес: ' + addr;
                         }, 100);
 
 
@@ -162,6 +165,9 @@ button {
     <div id="root">
         <div class="center" id="root">
             <div id="col">
+                <div class="inl-block">
+                    <a id="cryptoname" style="text-align: bottom; height: 100%"></a>
+                </div>
                 <div class="inl-block">
                     <a style="text-align: bottom; height: 100%">1. Скопируйте адрес криптокошелька</a>
                     <button id="copy" onclick="myFunction()">
