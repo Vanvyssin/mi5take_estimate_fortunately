@@ -1,136 +1,259 @@
 <!DOCTYPE HTML>
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-        <script src="https://telegram.org/js/telegram-web-app.js"></script>
-        <script>
-            if (window.Telegram != null) {
-                            window.Telegram.WebApp.disableClosingConfirmation()
-                            //window.Telegram.WebApp.SettingsButton.show()
-                            window.Telegram.WebApp.SettingsButton.hide()
-                            //window.Telegram.WebApp.BackButton.enable()
-                            //window.Telegram.WebApp.BackButton.show()
-                            window.Telegram.WebApp.BackButton.hide()
-                            //window.Telegram.WebApp.BackButton.setText('test')
-                            window.Telegram.WebApp.MainButton.enable()
-                            //window.Telegram.WebApp.MainButton.show()
-                            window.Telegram.WebApp.MainButton.setText('Перейти на обменник')
-                        }
+<head>
+    <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        if (window.Telegram != null) {
+            window.Telegram.WebApp.disableClosingConfirmation()
+            //window.Telegram.WebApp.SettingsButton.show()
+            window.Telegram.WebApp.SettingsButton.hide()
+            //window.Telegram.WebApp.BackButton.enable()
+            //window.Telegram.WebApp.BackButton.show()
+            window.Telegram.WebApp.BackButton.hide()
+            //window.Telegram.WebApp.BackButton.setText('test')
+            window.Telegram.WebApp.MainButton.enable()
+            //window.Telegram.WebApp.MainButton.show()
+            window.Telegram.WebApp.MainButton.setText('Перейти на обменник')
+            window.Telegram.WebApp.enableClosingConfirmation()
+            window.Telegram.WebApp.expand();
+        }
 
-            //  setTimeout(a, 500);
-            //};
+        //window.Telegram.WebApp.showPopup();
 
-            //window.Telegram.WebApp.SettingsButton.onClick(a)
+        //let a = function () {
+        //  // navigator.clipboard.writeText('test test');
+        //  alert("Copied the text");
+        //  let params = new URLSearchParams(document.location.search);
+        //  let q = decodeURI(params.get("q"));
+        //  window.location = q;
+        //  b(hhh);
+        //};
 
-            //window.Telegram.WebApp.BackButton.onClick(function() {
-            //      })
+        //let b = function () {
+        //  setTimeout(a, 500);
+        //};
 
-            // window.Telegram.WebApp.MainButton.onClick(function () {
-            //setTimeout(function () {
-            //    alert(1);
-            //    window.Telegram.WebApp.showPopup({ title: 'tit', message: 'msg' });
-            //}, 5000);
+        //window.Telegram.WebApp.SettingsButton.onClick(a)
 
-            //let params = new URLSearchParams(document.location.search);
-            //let q = decodeURI(params.get("q"));
-            //window.location = q;
-            //})
+        //window.Telegram.WebApp.BackButton.onClick(function() {
+        //      })
 
-            let params = new URLSearchParams(document.location.search);
-            let q = decodeURI(params.get("q"));
-            let tag = decodeURI(params.get("tag"));
-            let addr = decodeURI(params.get("addr"));
-            let tg_token = decodeURI(params.get("TT"));
-            let user_id = decodeURI(params.get("UID"));
-            let transaction_id = params.get("t_id");
-            let crypto_name = params.get("c_name");
+        // window.Telegram.WebApp.MainButton.onClick(function () {
+        //setTimeout(function () {
+        //    alert(1);
+        //    window.Telegram.WebApp.showPopup({ title: 'tit', message: 'msg' });
+        //}, 5000);
 
-            //window.location = q;
+        //let params = new URLSearchParams(document.location.search);
+        //let q = decodeURI(params.get("q"));
+        //window.location = q;
+        //})
 
-            function notify(msg) {
+        let params = new URLSearchParams(document.location.search);
+        let q = decodeURI(params.get("q"));
+        let tag = decodeURI(params.get("tag"));
+        let addr = decodeURI(params.get("addr"));
+        let tg_token = decodeURI(params.get("TT"));
+        let user_id = decodeURI(params.get("UID"));
+        let transaction_id = params.get("t_id");
+        let crypto_name = params.get("c_name");
+        let t_sum = params.get('t_sum');
 
-                            var xhr = new XMLHttpRequest();
-                            xhr.open("POST", "https://api.telegram.org/bot" + tg_token + "/sendMessage", true);
-                            xhr.setRequestHeader('Content-Type', 'application/json');
-                            xhr.send(JSON.stringify({
-                                            "chat_id": user_id, "text": msg
-                                        }));
-                        }
+        //window.location = q;
 
-            function myFunction() {
-                            notify("copy text [" + transaction_id + "]");
-                            let copytext = addr;
-                            if (tag !== "null") {
-                                            copytext += ' tag: ' + tag;
-                                        }
-                            navigator.clipboard.writeText(copytext);
-                            window.Telegram.WebApp.showPopup({ title: 'Скопирован текст', message: copytext, buttons: [{ button_type: 'close', text: 'Ок' }] });
-                        }
+        function notify(msg) {
 
-            function goto() {
-                            notify("go to exch [" + transaction_id + "]");
-                            // window.Telegram.WebApp.showPopup({ title: 'Адрес', message: q, buttons: [{ button_type: 'close', text: 'Копировать' }] });
-                            //window.Telegram.WebApp.openLink(q);
-                            setTimeout(function(){
-                                            if (window.Telegram != null) {
-                                                            window.Telegram.WebApp.MainButton.hide()
-                                                            window.Telegram.WebApp.enableClosingConfirmation()
-                                                            window.Telegram.WebApp.expand();
-                                                        }
-                                            window.location = q;
-                                        }, 100);
-                        }
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://api.telegram.org/bot" + tg_token + "/sendMessage", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                "chat_id": user_id, "text": msg
+            }));
+        }
 
-            if (window.Telegram != null){
-                            window.Telegram.WebApp.MainButton.onClick(goto);
-                        }
+        function myFunction() {
+            notify("copy text [" + transaction_id + "]");
+            let copytext = addr;
+            if (tag !== "null") {
+                copytext += ' tag: ' + tag;
+            }
+            navigator.clipboard.writeText(copytext);
+            window.Telegram.WebApp.showPopup({ title: 'Скопирован текст', message: copytext, buttons: [{ button_type: 'close', text: 'Ок' }] });
+        }
 
+        function goto() {
+            notify("go to exch [" + transaction_id + "]");
+            // window.Telegram.WebApp.showPopup({ title: 'Адрес', message: q, buttons: [{ button_type: 'close', text: 'Копировать' }] });
+            //window.Telegram.WebApp.openLink(q);
+            let loader_container = document.getElementById("loader-container");
+            loader_container.style.display = "flex";
+            // loader_container.style.height = "100%";
+            // loader_container.style.width = "100%";
+            loader_container.classList.add("blur");
+            // loader_container.classList.add("fadeIn");
+            let loaders = loader_container.getElementsByClassName("loader");
+            for (let i = 0; i < loaders.length; i++) {
+                loaders[i].classList.add("loaderFadeIn");
+            }
 
-            setTimeout(function(){
-                            let btn = document.getElementById("copy"); 
-                            if (tag === "null") {
-                                            btn.textContent = 'Скопировать адрес';
-                                        }
-                            else {
-                                            btn.textContent = 'Скопировать тэг и адрес';
-                                        }
-                            let cryptoname_el = document.getElementById("cryptoname");
-                            let cryptoaddr_el = document.getElementById("cryptoaddr"); 
-                
-                            cryptoname_el.textContent = 'Криптовалюта: ' + crypto_name;
-                            cryptoaddr_el.textContent = 'Адрес: ' + addr;
-                        }, 100);
+            setTimeout(function () {
+                if (window.Telegram != null) {
+                    window.Telegram.WebApp.MainButton.hide()
+                    window.Telegram.WebApp.expand();
+                }
+                window.location = q;
+            }, 100);
+        }
 
-
-            notify("start [" + transaction_id + "]");
+        if (window.Telegram != null) {
+            window.Telegram.WebApp.MainButton.onClick(goto);
+        }
 
 
-        </script>
-        <style>
+        function openBestchange() {
+            notify("bestchange[" + transaction_id + "]")
+            window.Telegram.WebApp.openLink('https://bestchange.ru')
+        }
+
+        let faq = [
+            {
+                "q": '1. Еще раз, что нужно сделать?',
+                "ans": 'Перейдите на страницу обменника, которую мы для Вас подготовили. Укажите в графе "Отправляете" сумму рублей Вашей покупки, укажите скопированный Вами адрес криптокошелька, заполните всю прочую информацию и совершите перевод на появившуюся карту — это и есть оплата Вашей покупки'
+            },
+            {
+                "q": '2. Какую сумму надо переводить?',
+                "ans": 'Указывайте и переводите ровно сумму Вашей покупки — [[t_sum]] ₽',
+            },
+            {
+                "q": '3. Стоит ли указывать достоверную контактную информацию?',
+                "ans": 'Мы настоятельно рекомендуем указывать достоверный E-mail, к которому у Вас есть доступ. На него придет чек операции от обменника, который защитит Вас от любых рисков в случае неполадок',
+            },
+            {
+                "q": '4. Что это за адрес криптокошелька?',
+                "ans": 'Этот криптокошелек привязан именно к Вашей оплате. Как только на него поступит нужное количество криптовалюты, магазин выдаст Вашу покупку. Копируйте его каждый раз при получении новой ссылки',
+            },
+            {
+                "q": '5. Почему нельзя закрывать это окно после совершения перевода?',
+                "ans": 'Если окно будет закрыто, Вы не сможете оказаться на странице именно Вашей транзакции в обменнике, но иногда надо нажать "Я оплатил" для завершения операции',
+            },
+            {
+                "q": '6. Нужно перевести деньги в банке, но при этом нельзя закрывать окно. Как это сделать?',
+                "ans": 'Выйдете из приложения Телеграм на главный экран Вашего телефона с помощью кнопки "Дом" или жеста. Окно будет ждать Вас, когда Вы вернетесь в Телеграм вновь. Вы можете делать так несколько раз, совершая любые действия в других приложениях. Главное — не закрывайте Телеграм через диспетчер задач и не переходите по уведомлениям в другие чаты Телеграм',
+            },
+            {
+                "q": '7. Когда можно закрыть окно?',
+                "ans": 'В любой момент до совершения Вами перевода. И в любой момент после, если обменник подтвердил Ваш перевод',
+            },
+            {
+                "q": '8. Что делать, если меня не устраивает текущий обменник?',
+                "ans": 'Вы всегда можете запросить новую ссылку в боте по кнопке "Получить другую ссылку", чтобы воспользоваться другим обменником'
+            },
+            {
+                "q": '9. Почему именно эти обменники?',
+                "ans": 'Все обменники, которые Вы видите у нас были отобраны и проверены. Также у каждого из них большой положительный рейтинг на <a onclick="openBestchange()" style="text-decoration: underline; cursor:pointer;" class="faq">bestchange.ru</a>',
+            }
+        ];
 
 
-* {
-font-family: 'Roboto', sans-serif;
-}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-button {
-    font-size: 4vw;
-    color: var(--tg-theme-button-text-color);
-    background-color: var(--tg-theme-button-color);
-    border: none;
-    outline:none;
-    padding: 0.5em 5vw;
-    border-radius: 1vw;
-    width: 100%;
-    margin-top: 2vw;
-}
+
+
+
+
+        setTimeout(function () {
+            let btn = document.getElementById("copy");
+            if (tag === "null") {
+                btn.textContent = 'Скопировать адрес';
+            }
+            else {
+                btn.textContent = 'Скопировать тэг и адрес';
+            }
+            let cryptoname_el = document.getElementById("cryptoname");
+            let cryptoaddr_el = document.getElementById("cryptoaddr");
+
+            cryptoname_el.textContent = 'Криптовалюта: ' + crypto_name;
+            cryptoaddr_el.textContent = 'Адрес: ' + addr;
+
+
+
+
+            let rootItems = document.getElementById("col");
+            for (let i = 0; i < faq.length; i++) {
+                let f = faq[i];
+                let q = f.q;
+                let ans = f.ans;
+                ans = ans.replace('[[t_sum]]', t_sum);
+
+                let newDetails = document.createElement("details");
+                newDetails.id = 'detail-faq-' + i;
+                newDetails.addEventListener("toggle", function () {
+                    let summary = document.getElementById('detail-faq-' + i).getElementsByTagName('summary')[0];
+                    let bounds = summary.getBoundingClientRect();
+                    
+                    // summary.scrollTop = summary.scrollHeight;
+                    // summary.scrollIntoView();
+                    // window.scroll({ top: summary.scrollHeight, behavior: 'smooth' });
+
+                    
+                    window.scrollTo({ top: summary.offsetTop, behavior: 'smooth' })
+                    notify("faq[" + transaction_id + "]{" + faq[i].q + "}");
+                })
+                newDetails.innerHTML = '<summary class="faq"><b>' + q + '</b></summary><div class="faq"><div class="faq-ans">' + ans + '</div></div>';
+                rootItems.insertBefore(newDetails, document.getElementById('col-end'));
+            }
+
+            var details = document.getElementsByTagName("details")
+        }, 100);
+
+
+
+
+        notify("start [" + transaction_id + "]");
+
+
+    </script>
+    <style>
+        * {
+            font-family: 'Roboto', sans-serif;
+            color: var(--tg-theme-text-color);
+        }
+
+        button {
+            font-size: 4vw;
+            color: var(--tg-theme-button-text-color);
+            background-color: var(--tg-theme-button-color);
+            border: none;
+            outline: none;
+            padding: 0.5em 5vw;
+            border-radius: 1vw;
+            width: 100%;
+            margin-top: 2vw;
+        }
+
         html {
             background-color: var(--tg-theme-secondary-bg-color);
         }
+
         .center {
             position: absolute;
             margin: auto;
@@ -152,45 +275,186 @@ button {
             justify-content: center;
         }
 
-        .inl-block a{
+        .inl-block a {
             color: var(--tg-theme-text-color);
             font-size: 4vw;
         }
+
         .inl-block {
             margin-top: 5vw;
             margin-bottom: 5vw;
         }
-        </style>
-    </head>
 
-    <body>
-    </body>
-    <div id="root">
-        <div class="center" id="root">
-            <div id="col">
-                <div class="inl-block">
-                    <a id="cryptoname" style="text-align: bottom; height: 100%; width: 100%; font-size: 3vw;"></a> </br>
-                    <a id="cryptoaddr" style="text-align: bottom; height: 100%; width: 100%; font-size: 3vw;"></a>
-                </div>
-                <div class="inl-block">
-                    <a style="text-align: bottom; height: 100%">1. Скопируйте адрес криптокошелька</a>
-                    <button id="copy" onclick="myFunction()">
-                    </button>
-                </div>
-                <div class="inl-block">
-                    <a  style="text-align: bottom; height: 100%">2. Перейдите на обменник, но ❗️</a>
-                    <button onclick="goto()">
-                        Перейти на обменник
-                    </button>
-                </div>
-                <div class="inl-block">
-                    <a>
-                        ❗️ Если Вы совершили перевод, то вернувшись в Телеграм, не закрывайте это окно и не переходите по уведомлениям в другие чаты, пока обменник не подтвердит Ваш перевод — Вы увидите это на странице обменника
-                    </a>
-                </div>
+        #loader-container {
+            /* z-index: -1; */
+            position: absolute;
+            /* display: flex; */
+            display: none;
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            /* width: 0; */
+            /* height: 0; */
+            /* backdrop-filter: blur(5px); */
+        }
+
+        .blur {
+            -webkit-animation: blur linear forwards 0.5s;
+            -moz-animation: blur linear forwards 0.5s;
+            -ms-animation: blur linear forwards 0.5s;
+            -o-animation: blur linear forwards 0.5s;
+            animation: blur linear forwards 0.5s;
+            /* backdrop-filter: blur(5px); */
+        }
+
+        @-webkit-keyframes blur {
+            0% {
+                -webkit-backdrop-filter: blur(0px);
+                backdrop-filter: blur(0px);
+            }
+
+            100% {
+                -webkit-backdrop-filter: blur(5px);
+                backdrop-filter: blur(5px);
+            }
+        }
+
+        @-moz-keyframes blur {
+            0% {
+                -moz-backdrop-filter: blur(0px);
+                backdrop-filter: blur(0px);
+            }
+
+            100% {
+                -moz-backdrop-filter: blur(5px);
+                backdrop-filter: blur(5px);
+            }
+        }
+
+        @keyframes blur {
+            0% {
+                -webkit-backdrop-filter: blur(0);
+                -moz-backdrop-filter: blur(0);
+                backdrop-filter: blur(0);
+            }
+
+            100% {
+                -webkit-backdrop-filter: blur(5px);
+                -moz-backdrop-filter: blur(5px);
+                backdrop-filter: blur(5px);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+
+        .loader {
+            aspect-ratio: 1;
+            min-width: 20vw;
+            border: 2.2vw solid var(--tg-theme-text-color, red);
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1.5s linear infinite;
+        }
+
+        .loaderFadeIn {
+            animation: fadeIn 1s, rotation 1.5s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        details[open] summary~* {
+            animation: sweep .5s ease-in-out;
+        }
+
+        details {
+            margin-bottom: 2vh;
+        }
+
+        .faq {
+            font-size: 2vh;
+        }
+        .faq-ans {
+            margin-left: 5vw;
+            margin-top: 1vh;
+            background-color: var(--tg-theme-bg-color, black);
+            padding: 2vw;
+            border-radius: 4vw;
+            line-height: 1.5;
+        }
+
+        @keyframes sweep {
+            0% {
+                opacity: 0;
+                margin-left: -10px
+            }
+
+            100% {
+                opacity: 1;
+                margin-left: 0px
+            }
+        }
+    </style>
+</head>
+
+<body>
+</body>
+<div id="root">
+    <div class="center" id="root">
+        <div id="col">
+            <div class="inl-block">
+                <a id="cryptoname" style="text-align: bottom; height: 100%; width: 100%; font-size: 3vw;"></a> </br>
+                <a id="cryptoaddr" style="text-align: bottom; height: 100%; width: 100%; font-size: 3vw;"></a>
             </div>
-
+            <div class="inl-block">
+                <a style="text-align: bottom; height: 100%">1. Скопируйте адрес криптокошелька</a>
+                <button id="copy" onclick="myFunction()">
+                </button>
+            </div>
+            <div class="inl-block">
+                <a style="text-align: bottom; height: 100%">2. Перейдите на обменник, но ❗️</a>
+                <button onclick="goto()">
+                    Перейти на обменник
+                </button>
+            </div>
+            <div class="inl-block" style="margin-top: 2vw;">
+                <a>
+                    ❗️ Если Вы совершили перевод, то вернувшись в Телеграм, не закрывайте это окно и не переходите по
+                    уведомлениям в другие чаты, пока обменник не подтвердит Ваш перевод — Вы увидите это на странице
+                    обменника
+                </a>
+            </div>
+            <div style="font-size: 5vw; font-weight: 700; margin-bottom: 2vh; margin-top: 5vw;">FAQ</div>
+            <div id="col-end" />
         </div>
+
     </div>
+</div>
+
+<div id="loader-container">
+    <span class="loader"></span>
+</div>
 
 </html>
