@@ -190,9 +190,12 @@
             }
             let cryptoname_el = document.getElementById("cryptoname");
             let cryptoaddr_el = document.getElementById("cryptoaddr");
+            let cryptoamount_el = document.getElementById("cryptoamount");
+            
 
             cryptoname_el.textContent = 'Криптовалюта: ' + crypto_name;
             cryptoaddr_el.textContent = 'Адрес: ' + addr;
+            cryptoamount_el.textContent = 'Сумма: ' + t_sum + ' ' + crypto_name;
 
 
 
@@ -426,6 +429,7 @@
     <div class="center" id="root">
         <div id="col">
             <div class="inl-block">
+                <a id="cryptoamount" style="text-align: bottom; height: 100%; width: 100%; font-size: 3vw;"></a> </br>
                 <a id="cryptoname" style="text-align: bottom; height: 100%; width: 100%; font-size: 3vw;"></a> </br>
                 <a id="cryptoaddr" style="text-align: bottom; height: 100%; width: 100%; font-size: 3vw;"></a>
             </div>
@@ -436,6 +440,9 @@
                 <a style="text-align: bottom; height: 100%">1. Скопируйте адрес криптокошелька</a>
                 <button id="copy" onclick="myFunction()">
                 </button>
+            </div>
+            <diV class="faq-ans" style="color:white;background-color:#C7253E;padding:16px;font-size: 3vw;margin:0px">
+                ВНИМАНИЕ: указывайте в обменнике нужную сумму криптовалюты в графе "Получаете". Если Вы укажите неправильную сумму, мы не гарантируем сохранность ваших денег.
             </div>
             <div class="inl-block">
                 <a style="text-align: bottom; height: 100%">2. Перейдите на обменник, но ❗️</a>
